@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'social_network_project_fuck.urls'
+ROOT_URLCONF = 'social_network_project.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'social_network_project_fuck.wsgi.application'
+WSGI_APPLICATION = 'social_network_project.wsgi.application'
 
 
 # Database
