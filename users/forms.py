@@ -12,14 +12,17 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}), max_length=50)
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
     description = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Something about you'}), max_length=256)
-    avatar = forms.ImageField()
+        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Something about you'}),
+        max_length=256,
+        required=False
+    )
+    avatar = forms.ImageField(required=False)
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}), max_length=50)
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password again'}), max_length=50)
 
-    class Meta(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = ('first_name', 'last_name', 'email', 'username', 'description', 'avatar', 'password1', 'password2')
 
@@ -33,13 +36,16 @@ class CustomUserChangeForm(UserChangeForm):
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}), max_length=50)
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
     description = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Something about you'}), max_length=256)
-    avatar = forms.ImageField()
+        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Something about you'}),
+        max_length=256,
+        required=False
+    )
+    avatar = forms.ImageField(required=False)
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}), max_length=50)
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password again'}), max_length=50)
 
-    class Meta(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
         model = CustomUser
         fields = ('first_name', 'last_name', 'email', 'username', 'description', 'avatar', 'password1', 'password2')
