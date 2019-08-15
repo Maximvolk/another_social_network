@@ -1,5 +1,6 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth import get_user_model
+from tinymce import HTMLField
 
 
 class Article(models.Model):
@@ -17,11 +18,17 @@ class Article(models.Model):
 
     title = models.CharField(max_length=256)
     category = models.CharField(max_length=4, choices=categories)
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE
-    )
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
+    body = HTMLField('Content')
 
-    # TODO: Add body field (decide how to store it)
+    def __str__(self):
+        return self.title
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    date_created = models.DateField(auto_now_add=True)
+    body = models.TextField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
