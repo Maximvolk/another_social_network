@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def messenger(request):
+    return render(request, 'messenger/home.html', {})

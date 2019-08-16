@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
     path('auth/', include('django.contrib.auth.urls')),
+    path('home/', include('blog.urls')),
+    path('messages/', include('messenger.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
