@@ -2,10 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
-    {% block content %}{% endblock %}
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#"><strong>Yet Another Social Network</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a id="home" class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a id="messages" class="nav-link" href="/messages">Messages</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a id="me" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Me</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="/me">Profile</a>
+                        <a class="dropdown-item" href="/me/settings">Settings</a>
+                        <a class="dropdown-item" href="/me/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        if (window.location.href.includes('/home')){
+            $('#home').addClass('active');
+        } else if (window.location.href.includes('/messages')){
+            $('#messages').addClass('active');
+        }
+        else {
+            $('#me').addClass('active');
+        }
+    </script>
 </body>
 </html>
