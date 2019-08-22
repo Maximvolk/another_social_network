@@ -2,9 +2,11 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 {% block content %}
-    <h1 style="align-content: center;">{{ article.title }}<span class="badge badge-dark">{{ article.category }}</span></h1>
-    <img class="" src="{{ article.logo.url }}" style="margin-left: 0px;">
-    <div class="container">
+    <div style="margin-top: 6em;">
+        <h1 style="text-align: center; font-family: courier;">{{ article.title }}</h1>
+        <img class="" src="{{ article.logo.url }}" style="margin-left: 0px;">
+    </div>
+    <div class="container" style="padding-top: 4em; padding-left: 10em; padding-right: 10em;">
         {{ article.body | safe }}
     </div>
 {% endblock %}
