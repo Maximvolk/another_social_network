@@ -6,6 +6,8 @@ from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
 from datetime import datetime
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 
 def get_logo_path(instance, filename):
@@ -67,3 +69,9 @@ class Comment(models.Model):
     date_created = models.DateField(auto_now_add=True)
     body = models.TextField()
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+
+@receiver(post_delete, sender=Article)
+def delete_logo_when_article_deleted(sender, instance, **kwargs):
+    instance.logo.delete(False)
+    instance.logo_preview.delete(False)
