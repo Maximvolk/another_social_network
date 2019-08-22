@@ -4,17 +4,15 @@
 {% block title %}Home{% endblock %}
 {% block style %}
     .grey a:hover {
-        background-color: dimgrey;
-        color: white;
+        color: black;
     }
 
     .grey a {
         color: dimgrey;
     }
 
-    .nav-pills > li.active > a {
-        background-color: dimgrey;
-        color: white;
+    .navbar-nav > li > a.active {
+        color: black;
     }
 
     #preview {
@@ -26,36 +24,38 @@
     }
 {% endblock %}
 {% block content %}
-    <ul class="nav nav-pills justify-content-center grey" style="margin-top: 56px;">
-        <li id="prog" class="nav-item">
-            <a class="nav-link" href="/home/prog">Programming</a>
-        </li>
-        <li id="robo" class="nav-item">
-            <a class="nav-link" href="/home/robo">Robotics</a>
-        </li>
-        <li id="math" class="nav-item">
-            <a class="nav-link" href="/home/math">Mathematics</a>
-        </li>
-        <li id="cs" class="nav-item">
-            <a class="nav-link" href="/home/cs">Computer science</a>
-        </li>
-        <li id="bc" class="nav-item">
-            <a class="nav-link" href="/home/bc">Blockchain</a>
-        </li>
-        <li id="iot" class="nav-item">
-            <a class="nav-link" href="/home/iot">Internet Of Things</a>
-        </li>
-        <li id="ml" class="nav-item">
-            <a class="nav-link" href="/home/ml">Machine Learning</a>
-        </li>
-        <li id="hard" class="nav-item">
-            <a class="nav-link" href="/home/hard">Hardware</a>
-        </li>
-        <li id="do" class="nav-item">
-            <a class="nav-link" href="/home/do">DevOps</a>
-        </li>
-    </ul>
-    <div class="container" style="padding-top: 10px;">
+    <nav class="navbar navbar-expand-md" style="height: 2em; margin-top: 4em;">
+        <ul class="navbar-nav nav-fill w-100 grey">
+            <li class="nav-item">
+                <a id="prog" class="nav-link" href="/home/prog">Programming</a>
+            </li>
+            <li class="nav-item">
+                <a id="robo" class="nav-link" href="/home/robo">Robotics</a>
+            </li>
+            <li class="nav-item">
+                <a id="math" class="nav-link" href="/home/math">Mathematics</a>
+            </li>
+            <li class="nav-item">
+                <a id="cs" class="nav-link" href="/home/cs">Computer science</a>
+            </li>
+            <li class="nav-item">
+                <a id="bc" class="nav-link" href="/home/bc">Blockchain</a>
+            </li>
+            <li class="nav-item">
+                <a id="iot" class="nav-link" href="/home/iot">Internet Of Things</a>
+            </li>
+            <li class="nav-item">
+                <a id="ml" class="nav-link" href="/home/ml">Machine Learning</a>
+            </li>
+            <li class="nav-item">
+                <a id="hard" class="nav-link" href="/home/hard">Hardware</a>
+            </li>
+            <li class="nav-item">
+                <a id="do" class="nav-link" href="/home/do">DevOps</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid mx-5" style="padding-top: 2em;">
         {% for article_set in articles %}
             <div class="row mb-5">
                 {% for article in article_set %}
