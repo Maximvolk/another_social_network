@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "blog/base.html" %}
 
-</body>
-</html>
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+    <h1 style="align-content: center;">{{ article.title }}<span class="badge badge-dark">{{ article.category }}</span></h1>
+    <img class="" src="{{ article.logo.url }}" style="margin-left: 0px;">
+    <div class="container">
+        {{ article.body | safe }}
+    </div>
+{% endblock %}

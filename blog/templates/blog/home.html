@@ -1,4 +1,68 @@
 {% extends "blog/base.html" %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
-{% block content %}<h1>Hello world!</h1>{% endblock %}
+{% block style %}
+    .grey a:hover {
+        background-color: dimgrey;
+        color: white;
+    }
+
+    .grey a {
+        color: dimgrey;
+    }
+
+    .nav-pills > li.active > a {
+        background-color: dimgrey;
+        color: white;
+    }
+{% endblock %}
+{% block content %}
+    <ul class="nav nav-pills justify-content-center grey" style="margin-top: 56px;">
+        <li id="prog" class="nav-item">
+            <a class="nav-link" href="/home/prog">Programming</a>
+        </li>
+        <li id="robo" class="nav-item">
+            <a class="nav-link" href="/home/robo">Robotics</a>
+        </li>
+        <li id="math" class="nav-item">
+            <a class="nav-link" href="/home/math">Mathematics</a>
+        </li>
+        <li id="cs" class="nav-item">
+            <a class="nav-link" href="/home/cs">Computer science</a>
+        </li>
+        <li id="bc" class="nav-item">
+            <a class="nav-link" href="/home/bc">Blockchain</a>
+        </li>
+        <li id="iot" class="nav-item">
+            <a class="nav-link" href="/home/iot">Internet Of Things</a>
+        </li>
+        <li id="ml" class="nav-item">
+            <a class="nav-link" href="/home/ml">Machine Learning</a>
+        </li>
+        <li id="hard" class="nav-item">
+            <a class="nav-link" href="/home/hard">Hardware</a>
+        </li>
+        <li id="do" class="nav-item">
+            <a class="nav-link" href="/home/do">DevOps</a>
+        </li>
+    </ul>
+    <div class="container" style="padding-top: 10px;">
+        {% for article_set in articles %}
+            <div class="row">
+                {% for article in article_set %}
+                    <div class="col">
+                        <a href="/home/{{ article.category }}/{{ article.id }}">
+                            <div class="card" style="width: 300px;">
+                                <img class="card-img-top" src="{{ article.logo_preview.url }}" alt="Card image">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ article.title }}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

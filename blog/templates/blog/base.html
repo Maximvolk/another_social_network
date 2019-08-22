@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>{% block title %}Home{% endblock %}</title>
+    <style>{% block style %}{% endblock %}</style>
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#"><strong>Yet Another Social Network</strong></a>
+        <a class="navbar-brand" href="/home"><strong>Yet Another Social Network</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,9 +32,7 @@
             </ul>
         </div>
     </nav>
-    <div class="jumbotron text-center">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Popper JS -->
@@ -48,6 +47,26 @@
         }
         else {
             $('#me').addClass('active');
+        }
+
+        if (window.location.href.includes('/prog')){
+            $('#prog').addClass('active');
+        } else if (window.location.href.includes('/robo')){
+            $('#robo').addClass('active');
+        } else if (window.location.href.includes('/math')) {
+            $('#math').addClass('active');
+        } else if (window.location.href.includes('/cs')) {
+            $('#cs').addClass('active');
+        } else if (window.location.href.includes('/bc')) {
+            $('#bc').addClass('active');
+        } else if (window.location.href.includes('/iot')) {
+            $('#iot').addClass('active');
+        } else if (window.location.href.includes('/ml')) {
+            $('#ml').addClass('active');
+        } else if (window.location.href.includes('/hard')) {
+            $('#hard').addClass('active');
+        } else if (window.location.href.includes('/do')) {
+            $('#do').addClass('active');
         }
     </script>
 </body>
