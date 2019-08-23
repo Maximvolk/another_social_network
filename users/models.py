@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
-from PIL import Image
+from PIL import Image, ImageOps
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
@@ -26,7 +26,7 @@ def get_avatar_preview_path(instance, filename):
 
 class CustomUser(AbstractUser):
     description = models.CharField(max_length=256)
-    avatar = models.ImageField(upload_to=get_avatar_path, default='avatars/default.png')
+    avatar = models.ImageField(upload_to=get_avatar_path, default='avatars/default.png', blank=True)
     avatar_preview = models.ImageField(upload_to=get_avatar_preview_path, null=True)
 
     def __str__(self):
@@ -41,7 +41,7 @@ class CustomUser(AbstractUser):
 
         # Resize image
         img = img.resize((225, 225))
-        preview = img.resize((100, 100))
+        preview = ImageOps.crop(img, (82, 82, 83, 83))
 
         # Save to the output
         img.save(output, format='PNG', quality=100)

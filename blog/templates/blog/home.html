@@ -22,6 +22,10 @@
     #preview:hover {
         text-decoration: none;
     }
+
+    #author:hover {
+        text-decoration: none;
+    }
 {% endblock %}
 {% block content %}
     <nav class="navbar navbar-expand-md" style="height: 2em; margin-top: 4em;">
@@ -67,6 +71,23 @@
                                     <h5 class="card-title" style="font-family: Verdana;"><strong>{{ article.title }}</strong></h5>
                                     <div class="card-text" style="color: dimgrey;">{{ article.annotation }}</div>
                                     <hr>
+                                    <a id="author" href="/user/{{ article.author.username }}">
+                                        <table>
+                                            <tr>
+                                                <td rowspan="2">
+                                                    <img class="rounded-circle" src="{{ article.author.avatar_preview.url }}" alt="Author avatar">
+                                                </td>
+                                                <td style="padding-left: 0.5em;">
+                                                    <span style="font-family: courier;">{{ article.author.first_name }} {{ article.author.last_name }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 0.5em;">
+                                                    <span style="font-size: 90%; color: dimgrey;">{{ article.date_created }}</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </a>
                                 </div>
                             </a>
                         </div>

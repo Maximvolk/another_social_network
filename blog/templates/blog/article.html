@@ -1,16 +1,35 @@
 {% extends "blog/base.html" %}
 
 {% block title %}{{ article.title }}{% endblock %}
+{% block style %}
+    #author:hover {
+        text-decoration: none;
+    }
+{% endblock %}
 {% block content %}
     <div style="margin-top: 6em;">
         <h1 class="display-4" style="text-align: center; font-family: verdana;">{{ article.title }}</h1>
         <div class="mx-auto my-3" style="width: 25em; text-align: left;">
             <i><p style="font-size: 120%;">{{ article.annotation }}</p></i>
+            <a id="author" href="/user/{{ article.author.username }}">
+                <table>
+                    <tr>
+                        <td rowspan="2">
+                            <img class="rounded-circle" src="{{ article.author.avatar_preview.url }}" alt="Author avatar">
+                        </td>
+                        <td style="padding-left: 0.5em;">
+                            <span style="font-family: courier;">{{ article.author.first_name }} {{ article.author.last_name }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 0.5em;">
+                            <span style="font-size: 90%; color: dimgrey;">{{ article.date_created }}</span>
+                        </td>
+                    </tr>
+                </table>
+            </a>
         </div>
-        <div>
-
-        </div>
-        <img class="img-fluid" src="{{ article.logo.url }}" alt="Logo image">
+        <img class="img-fluid" src="{{ article.logo.url }}" alt="Logo image" style="padding-top: 2em;">
     </div>
     <div class="container" style="padding-top: 4em; padding-left: 10em; padding-right: 10em;">
         {{ article.body | safe }}
