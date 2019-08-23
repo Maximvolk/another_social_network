@@ -20,10 +20,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    if not False:  # request.GET['next']:
-        return redirect('/home')
-    else:
-        return redirect(request.GET['next'])
+    return redirect('/home')
 
 
 def user(request, username):
