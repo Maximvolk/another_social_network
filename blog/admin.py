@@ -4,7 +4,8 @@ from .models import Article, Comment
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'logo', 'logo_preview', 'category', 'author', 'date_created', 'date_modified']
+    list_display = ['title', 'annotation', 'logo', 'logo_preview',
+                    'category', 'author', 'date_created', 'date_modified']
     exclude = ['author', 'logo_preview']
 
     def save_model(self, request, instance, form, change):

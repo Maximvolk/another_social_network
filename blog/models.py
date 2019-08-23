@@ -5,19 +5,27 @@ from io import BytesIO
 from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
+import os
 from datetime import datetime
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.conf import settings
 
 
 def get_logo_path(instance, filename):
     timestamp = int(datetime.now().timestamp())
-    return 'articles/logo/{timestamp}.png'.format(timestamp=timestamp)
+    path = 'articles/logo/{timestamp}.png'.format(timestamp=timestamp)
+    if os.path.exists(os.path.join(settings.MEDIA_ROOT, path)):
+        os.remove(os.path.join(settings.MEDIA_ROOT, path))
+    return path
 
 
 def get_logo_preview_path(instance, filename):
     timestamp = int(datetime.now().timestamp())
-    return 'articles/logo_preview/{timestamp}.png'.format(timestamp=timestamp)
+    path = 'articles/logo_preview/{timestamp}.png'.format(timestamp=timestamp)
+    if os.path.exists(os.path.join(settings.MEDIA_ROOT, path)):
+        os.remove(os.path.join(settings.MEDIA_ROOT, path))
+    return path
 
 
 class Article(models.Model):
@@ -34,6 +42,7 @@ class Article(models.Model):
     ]
 
     title = models.CharField(max_length=256)
+    annotation = models.TextField(max_length=150, default='Lorem ipsum')
     logo = models.ImageField(upload_to=get_logo_path, null=True)
     logo_preview = models.ImageField(upload_to=get_logo_preview_path, null=True)
     category = models.CharField(max_length=4, choices=categories)

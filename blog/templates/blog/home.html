@@ -60,15 +60,16 @@
             <div class="row mb-5">
                 {% for article in article_set %}
                     <div class="col">
-                        <a id="preview" href="/home/{{ article.category }}/{{ article.id }}">
-                            <div class="card" style="width: 300px;">
+                        <div class="card" style="width: 300px;">
+                            <a id="preview" href="/home/{{ article.category }}/{{ article.id }}">
                                 <img class="card-img-top" src="{{ article.logo_preview.url }}" alt="Card image">
                                 <div class="card-body">
-                                    <h5 class="card-title" style="font-family: courier;">{{ article.title }}</h5>
+                                    <h5 class="card-title" style="font-family: Verdana;"><strong>{{ article.title }}</strong></h5>
+                                    <div class="card-text" style="color: dimgrey;">{{ article.annotation }}</div>
                                     <hr>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
