@@ -53,7 +53,7 @@ class CustomUser(AbstractUser):
             output, 'ImageField', '%s.png' % self.avatar.name.split('.')[0], 'image/png', sys.getsizeof(output), None
         )
         self.avatar_preview = InMemoryUploadedFile(
-            output_preview, 'ImageField', get_avatar_preview_path(self, ''),
+            output_preview, 'ImageField', 'avatars_preview/{username}.png'.format(username=self.username),
             'image/png', sys.getsizeof(output_preview), None
         )
         super(CustomUser, self).save(*args, **kwargs)

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from .models import CustomUser
 
 
@@ -49,3 +49,8 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = CustomUser
         fields = ('first_name', 'last_name', 'email', 'username', 'description', 'avatar', 'password1', 'password2')
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'login_username'}), max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'login_password'}), max_length=50)
