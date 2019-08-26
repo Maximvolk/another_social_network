@@ -133,7 +133,9 @@ MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-LOGIN_URL = '/login'
+LOGIN_URL = '/user/login'
+LOGIN_REDIRECT_URL = '/home'
+LOGOUT_REDIRECT_URL = '/home'
 
 # Tiny MCE editor config
 TINYMCE_DEFAULT_CONFIG = {

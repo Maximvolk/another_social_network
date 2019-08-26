@@ -27,35 +27,17 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/{{ user.username }}">Profile</a>
                             <a class="dropdown-item" href="/user/{{ user.username }}/settings">Settings</a>
-                            <a class="dropdown-item" href="/user/logout">Logout</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                         </div>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a id="openLoginModal" class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Sign In</a>
+                        <a class="nav-link" href="/user/login">Sign In</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
     </nav>
-    <div class="modal" id="loginModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Sign In</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="/user/login">
-                        {% csrf_token %}
-                        <p>{{ login_form.as_p }}</p>
-                        <input type="hidden" name="next" value="{{ next }}">
-                        <input class="btn btn-primary" type="submit" value="Submit">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     {% block content %}{% endblock %}
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

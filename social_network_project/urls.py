@@ -24,5 +24,6 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('home/', include('blog.urls')),
     path('messages/', include('messenger.urls')),
-    path('user/', include('users.urls'))
+    path('user/', include('users.urls')),
+    path('auth/', include('django.contrib.auth.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

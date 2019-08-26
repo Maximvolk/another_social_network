@@ -1,26 +1,24 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
+from social_network_project import settings
 
 
 def login_view(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user_ = authenticate(request, username=username, password=password)
-
-    if user_ is not None:
-        login(request, user_)
-        if not request.POST['next']:
-            return redirect('/home')
-        else:
-            return redirect(request.POST['next'])
+    if request.method == 'GET':
+        return render(request, 'registration/login.html', {})
     else:
-        pass
+        username = request.POST.get('uname', False)
+        password = request.POST.get('pwd', False)
 
+        user_ = authenticate(request, username=username, password=password)
 
-def logout_view(request):
-    logout(request)
-    return redirect('/home')
+        if user_ is not None:
+            login(request, user_)
+            if request.GET.get('next'):
+                return redirect(request.GET.get('next'))
+            else:
+                return redirect(settings.LOGIN_REDIRECT_URL)
 
 
 def user(request, username):

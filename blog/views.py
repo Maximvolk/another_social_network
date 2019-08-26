@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Article, Comment
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -20,6 +21,7 @@ def home_category(request, category):
     return render(request, 'blog/home.html', context)
 
 
+@login_required()
 def article(request, category, article_id):
     article = Article.objects.get(pk=article_id)
     context = {
