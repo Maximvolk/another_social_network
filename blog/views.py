@@ -21,7 +21,7 @@ def home_category(request, category):
     return render(request, 'blog/home.html', context)
 
 
-@login_required()
+@login_required
 def article(request, category, article_id):
     article = Article.objects.get(pk=article_id)
     context = {

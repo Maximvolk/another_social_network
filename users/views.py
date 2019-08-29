@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser
+from blog.models import Article
 from django.contrib.auth import authenticate, login
 from social_network_project import settings
+from django.contrib.auth.decorators import login_required
 
 
 def login_view(request):
@@ -21,9 +23,26 @@ def login_view(request):
                 return redirect(settings.LOGIN_REDIRECT_URL)
 
 
+@login_required
 def user(request, username):
+    user_ = CustomUser.objects.get(username=username)
+    articles_ = Article.objects.filter(author__username=user_.username)
+    articles = [articles_[i:i + 3] for i in range(0, len(articles_), 3)]
+    context = {
+        'user': user_,
+        'articles': articles
+    }
+    return render(request, 'users/user.html', context)
+
+
+@login_required
+def user_settings(request, username):
     user_ = CustomUser.objects.get(username=username)
     context = {
         'user': user_
     }
-    return render(request, 'users/me.html', context)
+
+    if request.user.username == username:
+        return render(request, 'users/settings.html', context)
+    else:
+        return redirect(settings.LOGIN_REDIRECT_URL)
