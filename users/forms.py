@@ -29,12 +29,12 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomUserChangeForm(UserChangeForm):
     first_name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}), max_length=50)
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}), max_length=50, required=False)
     last_name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), max_length=50)
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), max_length=50, required=False)
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}), max_length=50)
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}), max_length=50, required=False)
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}), required=False)
     description = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Something about you'}),
         max_length=256,

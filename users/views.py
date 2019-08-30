@@ -4,6 +4,7 @@ from blog.models import Article
 from django.contrib.auth import authenticate, login
 from social_network_project import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def login_view(request):
@@ -21,6 +22,9 @@ def login_view(request):
                 return redirect(request.GET.get('next'))
             else:
                 return redirect(settings.LOGIN_REDIRECT_URL)
+        else:
+            messages.add_message(request, messages.ERROR, 'Invalid login or password')
+            return render(request, 'registration/login.html', {})
 
 
 @login_required

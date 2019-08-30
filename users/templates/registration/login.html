@@ -5,18 +5,15 @@
     <div class="mx-auto" style="margin-top: 8em; text-align: left; width: 15em;">
         <form method="post" action="" class="was-validated">
             {%  csrf_token %}
-            <div class="form-group">
-                <label for="uname">Username:</label>
-                <input type="text" class="form-control" id="uname" name="uname" required>
-                <div class="valid-feedback"></div>
-                <div class="invalid-feedback">Fill out this field</div>
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" name="pwd" required>
-                <div class="valid-feedback"></div>
-                <div class="invalid-feedback">Fill out this field</div>
-            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <span style="color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                {% endfor %}
+            {% endif %}
+            <label for="uname">Username:</label>
+            <input type="text" class="form-control" id="uname" name="uname" required><br>
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" name="pwd" required><br>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </div>
