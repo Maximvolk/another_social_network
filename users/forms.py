@@ -40,7 +40,7 @@ class CustomUserChangeForm(UserChangeForm):
         max_length=256,
         required=False
     )
-    avatar = forms.ImageField(required=False)
+    avatar = forms.ImageField()
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}), max_length=50)
     password2 = forms.CharField(

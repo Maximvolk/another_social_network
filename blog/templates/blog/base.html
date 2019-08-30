@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>{% block title %}Home{% endblock %}</title>
     <style>{% block style %}{% endblock %}</style>
+    {% block head %}{% endblock %}
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
@@ -26,6 +27,7 @@
                         <a id="me" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Me</a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/user/{{ user.username }}">Profile</a>
+                            <a class="dropdown-item" href="/home/write_article">Write Article</a>
                             <a class="dropdown-item" href="/user/{{ user.username }}/settings">Settings</a>
                             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                         </div>

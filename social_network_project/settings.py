@@ -166,3 +166,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
