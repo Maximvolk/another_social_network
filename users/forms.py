@@ -52,5 +52,5 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'login_username'}), max_length=50)
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'login_password'}), max_length=50)
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), max_length=50)

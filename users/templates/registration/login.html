@@ -10,11 +10,9 @@
                     <span style="color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
                 {% endfor %}
             {% endif %}
-            <label for="uname">Username:</label>
-            <input type="text" class="form-control" id="uname" name="uname" required><br>
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" name="pwd" required><br>
+            {{ form.as_p }}
             <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
+        </form><br>
+        <p>Don't have an account yet? <a href="/user/sign_up">Create one.</a></p>
     </div>
 {% endblock %}

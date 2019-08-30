@@ -5,7 +5,13 @@
     <div class="mx-auto" style="margin-top: 8em; text-align: left; width: 15em;">
         <form method="post">
             {% csrf_token %}
-
+            {% if messages %}
+                {% for message in messages %}
+                    <span style="color: green;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                {% endfor %}
+            {% endif %}
+            <p>{{ form.as_p }}</p>
+            <button class="btn btn-primary" type="submit">Save changes</button>
         </form>
     </div>
 {% endblock %}

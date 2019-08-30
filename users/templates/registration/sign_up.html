@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+    <div class="mx-auto" style="margin-top: 8em; text-align: left; width: 15em;">
+        <form method="post">
+            {% csrf_token %}
+            <p>{{ form.as_p }}</p>
+            <button class="btn btn-primary" type="submit">Create account</button>
+        </form>
+    </div>
+{% endblock %}
