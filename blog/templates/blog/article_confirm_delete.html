@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="mx-auto" style="margin-top: 8em; text-align: left; width: 15em;">
+        <form method="post">
+            {%  csrf_token %}
+            <p><h5>Are you sure you wanna delete article?</h5></p>
+            <button class="btn btn-danger" type="submit">Confirm</button>
+        </form>
+    </div>
+{% endblock %}

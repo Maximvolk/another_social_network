@@ -8,11 +8,11 @@ from django.http import HttpResponseForbidden
 
 
 class AuthorRequiredMixin:
-    def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request, **kwargs):
         author_ = Article.objects.get(pk=self.kwargs['pk']).author
         if request.user != author_:
             return HttpResponseForbidden()
-        return super(AuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
+        return super(AuthorRequiredMixin, self).dispatch(request, **kwargs)
 
 
 def home(request):
@@ -40,6 +40,24 @@ def article(request, category, pk):
         'article': article
     }
     return render(request, 'blog/article.html', context)
+
+
+class WriteArticleView(LoginRequiredMixin, CreateView):
+    template_name = 'blog/write_article.html'
+    model = Article
+    form_class = WriteArticleForm
+    success_url = '/home'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class UpdateArticleView(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
+    template_name = 'blog/write_article.html'
+    model = Article
+    form_class = WriteArticleForm
+    success_url = '/home'
 
 
 class DeleteArticleView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):

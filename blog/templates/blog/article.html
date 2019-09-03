@@ -34,4 +34,16 @@
     <div class="container" style="padding-top: 4em; padding-left: 10em; padding-right: 10em;">
         {{ article.body | safe }}
     </div>
+    {% if user.username == article.author.username %}
+        <div class="container" style="padding-top: 2em; padding-left: 10em; padding-right: 10em; padding-bottom: 4em;">
+            <div class="row">
+                <div class="col">
+                    <a href="update"><button class="btn btn-primary" type="submit">Edit</button></a>
+                </div>
+                <div class="col">
+                    <a href="delete"><button class="btn btn-danger" type="submit">Delete</button></a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
