@@ -55,22 +55,23 @@ class Article(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        # Resize logo_preview of article
-        # Open image
-        img = Image.open(self.logo)
-        output = BytesIO()
+        if not self.pk:
+            # Resize logo_preview of article
+            # Open image
+            img = Image.open(self.logo)
+            output = BytesIO()
 
-        # Resize image
-        img = img.resize((300, 185))
+            # Resize image
+            img = img.resize((300, 185))
 
-        # Save to the output
-        img.save(output, format='PNG', quality=100)
-        output.seek(0)
+            # Save to the output
+            img.save(output, format='PNG', quality=100)
+            output.seek(0)
 
-        self.logo_preview = InMemoryUploadedFile(
-            output, 'ImageField', '%s.png' % get_logo_preview_path(self, ''), 'image/png', sys.getsizeof(output), None
-        )
-        super(Article, self).save(*args, **kwargs)
+            self.logo_preview = InMemoryUploadedFile(
+                output, 'ImageField', '%s.png' % get_logo_preview_path(self, ''), 'image/png', sys.getsizeof(output), None
+            )
+            super(Article, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):
