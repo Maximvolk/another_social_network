@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Article, Comment
 from django.contrib.auth.decorators import login_required
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WriteArticleForm
 
@@ -25,8 +25,8 @@ def home_category(request, category):
 
 
 @login_required
-def article(request, category, article_id):
-    article = Article.objects.get(pk=article_id)
+def article(request, category, pk):
+    article = Article.objects.get(pk=pk)
     context = {
         'article': article
     }
@@ -37,8 +37,22 @@ class WriteArticleView(LoginRequiredMixin, CreateView):
     template_name = 'blog/write_article.html'
     model = Article
     form_class = WriteArticleForm
-    # fields = ['title', 'annotation', 'logo', 'category', 'body']
+    success_url = '/home'
 
-    def get_success_url(self):
-        return '/home/{category}/{article_id}'.format(
-            category=self.request.POST.get('category'), article_id=self.request.POST.get('id'))
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class UpdateArticleView(LoginRequiredMixin, UpdateView):
+    template_name = 'blog/write_article.html'
+    model = Article
+    form_class = WriteArticleForm
+    success_url = '/home'
+    permission_required = 'change_article'
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     author_ = Article.objects.get(pk=self.kwargs['article_id']).author
+    #     if request.user.username != author_.username:
+    #         raise PermissionDenied()
+    #     return super().dispatch(request, *args, **kwargs)

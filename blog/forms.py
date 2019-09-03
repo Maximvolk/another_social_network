@@ -19,7 +19,7 @@ class WriteArticleForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}), max_length=256)
     annotation = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Annotation'}), max_length=150)
-    logo = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+    logo = forms.ImageField(required=False)
     category = forms.ChoiceField(choices=categories, widget=forms.Select(attrs={'class': 'form-control'}))
     body = forms.CharField(widget=TinyMCE(attrs={'class': 'form-control'}, mce_attrs={'width': 800}))
 
