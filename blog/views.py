@@ -1,9 +1,18 @@
 from django.shortcuts import render
 from .models import Article, Comment
 from django.contrib.auth.decorators import login_required
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WriteArticleForm
+from django.http import HttpResponseForbidden
+
+
+class AuthorRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        author_ = Article.objects.get(pk=self.kwargs['pk']).author
+        if request.user != author_:
+            return HttpResponseForbidden()
+        return super(AuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
 
 
 def home(request):
@@ -25,20 +34,14 @@ def home_category(request, category):
 
 
 @login_required
-def article(request, category, article_id):
-    article = Article.objects.get(pk=article_id)
+def article(request, category, pk):
+    article = Article.objects.get(pk=pk)
     context = {
         'article': article
     }
     return render(request, 'blog/article.html', context)
 
 
-class WriteArticleView(LoginRequiredMixin, CreateView):
-    template_name = 'blog/write_article.html'
+class DeleteArticleView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     model = Article
-    form_class = WriteArticleForm
-    # fields = ['title', 'annotation', 'logo', 'category', 'body']
-
-    def get_success_url(self):
-        return '/home/{category}/{article_id}'.format(
-            category=self.request.POST.get('category'), article_id=self.request.POST.get('id'))
+    success_url = '/home'

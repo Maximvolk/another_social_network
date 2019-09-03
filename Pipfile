@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 pillow = "*"
 django-tinymce4-lite = "*"
+django-guardian = "*"
 
 [requires]
 python_version = "3.7"
