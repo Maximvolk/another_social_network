@@ -68,15 +68,10 @@ class DeleteArticleView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     form_class = WriteArticleForm
     success_url = '/home'
 
-# @login_required
-# def leave_comment(request, category, pk):
-#     article_ = Article.objects.get(pk=pk)
-#
-#     if request:
 
 
 class LeaveCommentView(View):
-    def get(self, request):
+    def get(self, request, **kwargs):
         return HttpResponseBadRequest()
 
     def post(self, request, **kwargs):

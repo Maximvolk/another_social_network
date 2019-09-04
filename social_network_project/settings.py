@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'messenger',
     'users.apps.UsersConfig',
     'tinymce',
-    'guardian'
 ]
 
 MIDDLEWARE = [
@@ -133,8 +132,6 @@ MEDIA_URL = '/media/'
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
-
-AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend', 'guardian.backends.ObjectPermissionBackend')
 
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/home'
