@@ -4,6 +4,15 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import WriteArticleForm
+from django.http import HttpResponseForbidden
+
+
+class AuthorRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        author_ = Article.objects.get(pk=self.kwargs['pk']).author
+        if request.user != author_:
+            return HttpResponseForbidden()
+        return super(AuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
 
 
 def home(request):
@@ -33,8 +42,7 @@ def article(request, category, pk):
     return render(request, 'blog/article.html', context)
 
 
-class WriteArticleView(LoginRequiredMixin, CreateView):
-    template_name = 'blog/write_article.html'
+class DeleteArticleView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     model = Article
     form_class = WriteArticleForm
     success_url = '/home'
